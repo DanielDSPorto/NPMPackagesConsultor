@@ -6,7 +6,16 @@ interface NPMPackagesState {
   data: string[];
 }
 
-const reducer = (state: NPMPackagesState, action: Action): NPMPackagesState => {
+const initialState = {
+  loading: false,
+  error: null,
+  data: [],
+};
+
+const reducer = (
+  state: NPMPackagesState = initialState,
+  action: Action
+): NPMPackagesState => {
   switch (action.type) {
     case ActionType.SEARCH_NPM_PACKAGES:
       return { loading: true, error: null, data: [] };
