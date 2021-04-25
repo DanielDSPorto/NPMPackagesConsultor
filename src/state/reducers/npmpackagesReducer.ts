@@ -1,34 +1,18 @@
+import { ActionType } from '../action-types';
+import { Action } from '../actions';
 interface NPMPackagesState {
   loading: boolean;
   error: string | null;
   data: string[];
 }
 
-interface SearchNPMPackagesAction {
-  type: 'search_npm_packages';
-}
-interface SearchNPMPackagesSuccessAction {
-  type: 'search_npm_packages_success';
-  payload: string[];
-}
-interface SearchNPMPackagesErrorAction {
-  type: 'search_npm_packages_error';
-  payload: string;
-}
-
-const reducer = (
-  state: NPMPackagesState,
-  action:
-    | SearchNPMPackagesAction
-    | SearchNPMPackagesSuccessAction
-    | SearchNPMPackagesErrorAction
-): NPMPackagesState => {
+const reducer = (state: NPMPackagesState, action: Action): NPMPackagesState => {
   switch (action.type) {
-    case 'search_npm_packages':
+    case ActionType.SEARCH_NPM_PACKAGES:
       return { loading: true, error: null, data: [] };
-    case 'search_npm_packages_success':
+    case ActionType.SEARCH_NPM_PACKAGES_SUCCESS:
       return { loading: false, error: null, data: action.payload };
-    case 'search_npm_packages_error':
+    case ActionType.SEARCH_NPM_PACKAGES_ERROR:
       return { loading: false, error: action.payload, data: [] };
     default:
       return state;
